@@ -47,12 +47,12 @@ namespace WeatherBE.Controllers
         {
             var appSettings = ConfigurationManager.AppSettings;
             var uri = string.Format(appSettings["BaseURL"] + "q={0},{1}&appid={2}&{3}&{4}", cityName, countryCode, appSettings["AppID"], K_MEASUREMENT_UNIT, K_LANGUAGE_CODE);
-            
+
 
             using (var http = new HttpClient())
             {
-                
-                var response = await http.GetStringAsync(uri);             
+
+                var response = await http.GetStringAsync(uri);
 
                 return Ok(response);
             }
@@ -78,17 +78,6 @@ namespace WeatherBE.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        // PUT api/<WeatherController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<WeatherController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
+
 }
