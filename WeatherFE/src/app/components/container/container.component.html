@@ -1,0 +1,39 @@
+<p>
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon><i class="fas fa-cloud-sun-rain"></i></mat-icon>
+    </button>
+    <span>Nico Weather</span>
+  </mat-toolbar>
+</p>
+
+<div class="comp-padding">
+  <form [formGroup]="weatherFormGroup">
+    <app-dropdown [lists]='countries' [form]='weatherFormGroup' [control]="'selectedCountry'"
+      (selectedCountry)='selectedCountry($event)'></app-dropdown>
+    <button mat-raised-button color="primary" type="submit" (click)=getWeatherData() class="example-margin"
+      [disabled]="!weatherFormGroup.valid">
+      <i class="fas fa-search icon-padding"></i>Consultar</button>
+    <br>
+    <mat-form-field appearance="fill" class="input-size">
+      <mat-label>Ciudad</mat-label>
+      <input matInput placeholder="" formControlName="city" type="text">
+    </mat-form-field>
+    <mat-checkbox class="example-margin" formControlName="history">Incluir historial</mat-checkbox>
+  </form>
+</div>
+
+<div *ngIf='weatherData.base'>
+  <mat-list role="list">
+    <mat-list-item role="listitem" class="margin-list">
+      <span>Ciudad: {{city}}, {{countrySelected.name}}</span>
+      <!-- <mat-list-item role="listitem" style="margin-left: 175px;">Ciudad: {{weatherFormGroup.get('city')?.value}}, {{countrySelected.name}} -->
+    </mat-list-item>
+    <mat-list-item role="listitem" class="margin-list">
+      <span>Clima: {{weatherData?.main?.temp}}° - Sensación Térmica: {{weatherData?.main?.feels_like}}°</span>
+    </mat-list-item>
+  </mat-list>
+</div>
+<div *ngIf="weatherFormGroup.get('history')?.value && weatherDataHistory">
+  <app-weather-data [weatherDataList]='weatherDataHistory'></app-weather-data>
+</div>
