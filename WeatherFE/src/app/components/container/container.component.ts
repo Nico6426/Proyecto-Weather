@@ -1,7 +1,6 @@
-import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FormsService } from 'src/app/services/forms.service';
 import { ServiceService } from 'src/app/services/service.service';
 
@@ -11,9 +10,19 @@ import { ServiceService } from 'src/app/services/service.service';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss']
 })
-export class ContainerComponent implements OnInit {
+export class ContainerComponent implements OnInit, OnDestroy {
 
+  subscription$1!: Subscription;
+  subscription$2!: Subscription;
+  subscription$3!: Subscription;
+  subscription$4!: Subscription;
 
+  ngOnDestroy(): void {
+    this.subscription$1.unsubscribe();
+    this.subscription$2.unsubscribe();
+    this.subscription$3.unsubscribe();
+    this.subscription$4.unsubscribe();
+  }
 
   public countries: any = [];
   public countrySelected: any = '';
@@ -25,6 +34,7 @@ export class ContainerComponent implements OnInit {
 
   constructor(private services: ServiceService, private formService: FormsService) { }
 
+
   ngOnInit(): void {
     this.getCountries();
     this.weatherFormGroup = this.formService.initializeFormGroup();
@@ -32,9 +42,12 @@ export class ContainerComponent implements OnInit {
   }
 
   getCountries() {
-    this.services.getIso3166().subscribe(response => {
-      this.countries = response[1];
-    });
+    this.subscription$1 = this.services.getCountriesForDropdown().subscribe(response => {
+      this.countries = response;
+    },
+      error => {
+        this.services.openSnackBar("An error ocurred!");
+      });
   }
 
 
@@ -44,7 +57,7 @@ export class ContainerComponent implements OnInit {
 
   getWeatherData() {
     if (this.weatherFormGroup.valid) {
-      this.services.getWeatherData(this.weatherFormGroup).subscribe(response => {
+      this.subscription$2 = this.services.getWeatherData(this.weatherFormGroup).subscribe(response => {
         if (this.weatherFormGroup.get('history')?.value) {
           this.getWeatherHistory();
         }
@@ -56,16 +69,23 @@ export class ContainerComponent implements OnInit {
           "clima": response.main.temp.toString(),
           "sensacionTermica": response.main.feels_like.toString()
         }
-        this.services.postToHistory(parameters).subscribe();
-      });
+        this.subscription$3 = this.services.postToHistory(parameters).subscribe();
+
+      },
+        error => {
+          this.services.openSnackBar("An error ocurred!");
+        })
 
     }
   }
 
   getWeatherHistory() {
-    this.services.getHistoryData(this.weatherFormGroup.get('city')?.value, this.countrySelected.name).subscribe(response => {
+    this.subscription$4 = this.services.getHistoryData(this.weatherFormGroup.get('city')?.value, this.countrySelected.name).subscribe(response => {
       this.weatherDataHistory = response;
-    })
+    },
+      error => {
+        this.services.openSnackBar("An error ocurred!");
+      })
   }
 
 }

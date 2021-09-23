@@ -4,7 +4,7 @@ import { ContainerComponent } from './components/container/container.component';
 
 const ROUTES: Routes = [
   { path: '', redirectTo: '/container', pathMatch: 'full' },
-  { path: 'container', component: ContainerComponent}
+  { path: 'container', component: ContainerComponent},
 ]
 
 @NgModule({

@@ -34,10 +34,19 @@ namespace WeatherBE.Controllers
         [Route("getHistory")]
         public async Task<IActionResult> GetHistory(string city, string country)
         {
-            var weather = await _context.Weather.ToListAsync();
-            weather = weather.Where(f => f.Ciudad.ToLower().Equals(city.ToLower()) &&
-            f.Pais.ToLower().Equals(country.ToLower())).ToList();
-            return Ok(weather);
+            try
+            {
+                var weather = await _context.Weather.ToListAsync();
+                weather = weather.Where(f => f.Ciudad.ToLower().Equals(city.ToLower()) &&
+                f.Pais.ToLower().Equals(country.ToLower())).ToList();
+                return Ok(weather);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // GET api/<WeatherController>/getWeather
@@ -45,18 +54,27 @@ namespace WeatherBE.Controllers
         [Route("getWeather")]
         public async Task<IActionResult> GetWeather(string cityName, string countryCode)
         {
-            var appSettings = ConfigurationManager.AppSettings;
-            var uri = string.Format(appSettings["BaseURL"] + "q={0},{1}&appid={2}&{3}&{4}", cityName, countryCode, appSettings["AppID"], K_MEASUREMENT_UNIT, K_LANGUAGE_CODE);
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                var uri = string.Format(appSettings["BaseURL"] + "q={0},{1}&appid={2}&{3}&{4}", cityName, countryCode, appSettings["AppID"], K_MEASUREMENT_UNIT, K_LANGUAGE_CODE);
 
 
-            using (var http = new HttpClient())
+                using (var http = new HttpClient())
+                {
+
+                    var response = await http.GetStringAsync(uri);
+
+                    return Ok(response);
+                }
+
+
+            }
+            catch (Exception ex)
             {
 
-                var response = await http.GetStringAsync(uri);
-
-                return Ok(response);
+                return BadRequest(ex.Message);
             }
-
 
         }
 

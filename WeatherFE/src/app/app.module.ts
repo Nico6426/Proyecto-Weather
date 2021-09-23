@@ -8,9 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
+import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -47,7 +47,8 @@ import { WeatherDataComponent } from './components/weather-data/weather-data.com
     FormsModule,
     MatListModule,
     MatAutocompleteModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule ,
+    MatSnackBarModule
 
   ],
   providers: [],

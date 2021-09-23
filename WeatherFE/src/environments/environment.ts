@@ -7,9 +7,7 @@ export const environment = {
   apiURL: 'https://localhost:44315/',
   getURL:'api/Weather/getWeather?',
   getHistoryURL: 'api/Weather/getHistory?',
-  postURL: 'api/Weather/postToHistory',
-  //countryIso: 'https://restcountries.eu/rest/v2/all'
-  countryIso: 'https://api.worldbank.org/v2/country/?format=json'
+  postURL: 'api/Weather/postToHistory'
 };
 
 /*

@@ -9,7 +9,7 @@
 
 <div class="comp-padding">
   <form [formGroup]="weatherFormGroup">
-    <app-dropdown [lists]='countries' [form]='weatherFormGroup' [control]="'selectedCountry'"
+    <app-dropdown [lists]='countries.countries' [form]='weatherFormGroup' [control]="'selectedCountry'"
       (selectedCountry)='selectedCountry($event)'></app-dropdown>
     <button mat-raised-button color="primary" type="submit" (click)=getWeatherData() class="example-margin"
       [disabled]="!weatherFormGroup.valid">

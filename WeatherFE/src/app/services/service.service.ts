@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FormGroup } from '@angular/forms';
 import { WeatherEnum } from '../shared/weather-enum';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +14,19 @@ import { WeatherEnum } from '../shared/weather-enum';
 
 export class ServiceService {
 
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
 
-  constructor(private http: HttpClient) { }
+  openSnackBar(mensaje: string) {
+    this._snackBar.open(mensaje, '', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 3000
+    });
+  }
 
-  getIso3166() : Observable<any> {
-    // return this.http.get(environment.countryIso);
-     return this.http.get(environment.countryIso);
+  
+  getCountriesForDropdown() {
+     return this.http.get(WeatherEnum.JSONPATH);
   }
 
   getWeatherData(form: FormGroup) : Observable<any> {
