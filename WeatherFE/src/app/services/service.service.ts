@@ -8,13 +8,16 @@ import { WeatherEnum } from '../shared/weather-enum';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class ServiceService {
 
 
   constructor(private http: HttpClient) { }
 
   getIso3166() : Observable<any> {
-    return this.http.get(environment.countryIso);
+    // return this.http.get(environment.countryIso);
+     return this.http.get(environment.countryIso);
   }
 
   getWeatherData(form: FormGroup) : Observable<any> {

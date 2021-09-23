@@ -33,7 +33,7 @@ export class ContainerComponent implements OnInit {
 
   getCountries() {
     this.services.getIso3166().subscribe(response => {
-      this.countries = response;
+      this.countries = response[1];
     });
   }
 
