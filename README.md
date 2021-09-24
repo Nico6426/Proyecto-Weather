@@ -18,13 +18,13 @@ Este proyecto utiliza Angular CLI 12.2.5 y .NET 5
 
 1_Clonar el repositorio en la carpeta deseada
 
-2_Correr script localizado en la carpeta DB (Proyecto-Weather/DB)
+2_Correr script localizado en Proyecto-Weather/DB
 
 3_Abrir la solucion Backend localizada en Proyecto-Weather/WeatherBE/WeatherBE/WeatherBE.sln y compilar.
 
 Por defecto, Swagger UI se abrirá para probar las APIS individualmente.
 
-Con una consola, localizarse en la carpeta que contiene el proyecto FrontEnd, localizado en Proyecto-Weather/WeatherFE. Una vez localizado, correr el comando 'npm install' que instalará las dependencias correspondientes.
+4_Con una consola, localizarse en la carpeta que contiene el proyecto FrontEnd, localizado en Proyecto-Weather/WeatherFE. Una vez localizado, correr el comando 'npm install' que instalará las dependencias correspondientes.
 
 ```
 
