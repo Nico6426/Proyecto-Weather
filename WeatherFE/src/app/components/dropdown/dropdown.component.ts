@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-
+import { Countries } from 'src/app/shared/interfaces/countries';
 
 @Component({
   selector: 'app-dropdown',
@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
 export class DropdownComponent implements OnInit {
   selected = '';
   
-  @Input() lists?: Array<any> = [];
+  @Input() lists?: Array<Countries> = [];
   @Input() form!: FormGroup;
   @Input() control!: string;
   @Output() selectedCountry = new EventEmitter();
@@ -22,7 +22,7 @@ export class DropdownComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectedItem(value: string) {
+  selectedItem(value: Countries) {
     this.selectedCountry.emit(value);
   }
 }

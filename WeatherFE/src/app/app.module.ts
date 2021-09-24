@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 
@@ -48,7 +50,8 @@ import { WeatherDataComponent } from './components/weather-data/weather-data.com
     MatListModule,
     MatAutocompleteModule,
     ReactiveFormsModule ,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [],

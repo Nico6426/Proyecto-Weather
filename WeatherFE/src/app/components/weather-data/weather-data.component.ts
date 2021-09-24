@@ -1,7 +1,5 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-import {MatSort} from '@angular/material/sort';
-
-
+import { Component, Input } from '@angular/core';
+import { WeatherHistory } from 'src/app/shared/interfaces/weather-history';
 
 @Component({
   selector: 'app-weather-data',
@@ -10,21 +8,14 @@ import {MatSort} from '@angular/material/sort';
 })
 
 
-export class WeatherDataComponent implements AfterViewInit {
+export class WeatherDataComponent {
 
-   @Input() weatherDataList: any = [];
+  @Input() weatherDataList!: Array<WeatherHistory>;
 
   displayedColumns: string[] = ['country', 'city', 'temperature', 'realFeel'];
-  //dataSource = new MatTableDataSource(this.weatherDataList);
-
-  @ViewChild(MatSort) sort: MatSort = new MatSort;
 
   constructor() { }
 
-
-  ngAfterViewInit() {
-    this.weatherDataList.sort = this.sort;
-  }
 }
 
 

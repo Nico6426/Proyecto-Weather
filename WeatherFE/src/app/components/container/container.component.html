@@ -1,6 +1,6 @@
 <p>
   <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button mat-icon-button class="example-icon icon-weather" aria-label="Example icon-button with menu icon">
       <mat-icon><i class="fas fa-cloud-sun-rain"></i></mat-icon>
     </button>
     <span>Nico Weather</span>
@@ -23,14 +23,17 @@
   </form>
 </div>
 
+<div class="wrapper" *ngIf="showSpinner">
+  <div class="inner" ><mat-progress-spinner mode="indeterminate"></mat-progress-spinner></div>
+</div>
+
 <div *ngIf='weatherData.base'>
   <mat-list role="list">
     <mat-list-item role="listitem" class="margin-list">
       <span>Ciudad: {{city}}, {{countrySelected.name}}</span>
-      <!-- <mat-list-item role="listitem" style="margin-left: 175px;">Ciudad: {{weatherFormGroup.get('city')?.value}}, {{countrySelected.name}} -->
     </mat-list-item>
     <mat-list-item role="listitem" class="margin-list">
-      <span>Clima: {{weatherData?.main?.temp}}° - Sensación Térmica: {{weatherData?.main?.feels_like}}°</span>
+      <span>Clima: {{weatherData?.main?.temp}}°C - Sensación Térmica: {{weatherData?.main?.feels_like}}°C</span>
     </mat-list-item>
   </mat-list>
 </div>
