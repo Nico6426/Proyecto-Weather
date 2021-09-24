@@ -9,7 +9,6 @@ Este proyecto utiliza Angular CLI 12.2.5 y .NET 5
 
 * [Instalacion](#instalacion)
 * [Uso](#uso)
-* [View](#view)
 * [Documentation](#documentacion)
 * [Licencia](#licencia)
 
